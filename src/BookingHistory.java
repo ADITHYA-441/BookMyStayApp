@@ -18,4 +18,8 @@ public class BookingHistory {
     public List<Reservation> getAllBookings() {
         return confirmedBookings;
     }
+
+    public boolean hasBooking(Reservation reservation) {
+        return false;
+    }
 }
