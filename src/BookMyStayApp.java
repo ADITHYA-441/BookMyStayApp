@@ -114,5 +114,10 @@ public class BookMyStayApp {
 
 // Generate summary
         reportService.generateSummary(history);
+        Reservation r4 = new Reservation("", "Single");       // invalid name
+        Reservation r5 = new Reservation("John", "Luxury");   // invalid room type
+
+        bookingQueue.addRequest(r4);
+        bookingQueue.addRequest(r5);
     }
 }
