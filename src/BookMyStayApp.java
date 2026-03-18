@@ -2,18 +2,17 @@ public class BookMyStayApp {
     public static void main(String[] args) {
         System.out.println("===== Book My Stay App =====");
 
-        // Create room objects
-        Room singleRoom = new SingleRoom();
-        Room doubleRoom = new DoubleRoom();
-        Room suiteRoom = new SuiteRoom();
+        /* --------------------------
+           Use Case 4: Room Search
+           -------------------------- */
 
-        // Create inventory
+        SingleRoom singleRoom = new SingleRoom();
+        DoubleRoom doubleRoom = new DoubleRoom();
+        SuiteRoom suiteRoom = new SuiteRoom();
+
         RoomInventory inventory = new RoomInventory();
-
-        // Search service
         RoomSearchService searchService = new RoomSearchService();
 
-        // Show available rooms
         searchService.searchAvailableRooms(
                 inventory,
                 singleRoom,
@@ -21,5 +20,32 @@ public class BookMyStayApp {
                 suiteRoom
         );
 
+        /* --------------------------
+           Use Case 5: Booking Queue
+           -------------------------- */
+
+        System.out.println("\nBooking Request Queue:");
+
+        BookingRequestQueue bookingQueue = new BookingRequestQueue();
+
+        Reservation r1 = new Reservation("Abhi", "Single");
+        Reservation r2 = new Reservation("Subha", "Double");
+        Reservation r3 = new Reservation("Vanmathi", "Suite");
+
+        bookingQueue.addRequest(r1);
+        bookingQueue.addRequest(r2);
+        bookingQueue.addRequest(r3);
+
+        while (bookingQueue.hasPendingRequests()) {
+
+            Reservation request = bookingQueue.getNextRequest();
+
+            System.out.println(
+                    request.getGuestName() +
+                            " requested " +
+                            request.getRoomType() +
+                            " room"
+            );
+        }
     }
 }
