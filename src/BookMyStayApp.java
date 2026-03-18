@@ -2,13 +2,9 @@ public class BookMyStayApp {
     public static void main(String[] args) {
         System.out.println("===== Book My Stay App =====");
 
-        /* --------------------------
-           Use Case 4: Room Search
-           -------------------------- */
-
-        SingleRoom singleRoom = new SingleRoom();
-        DoubleRoom doubleRoom = new DoubleRoom();
-        SuiteRoom suiteRoom = new SuiteRoom();
+        Room singleRoom = new SingleRoom();
+        Room doubleRoom = new DoubleRoom();
+        Room suiteRoom = new SuiteRoom();
 
         RoomInventory inventory = new RoomInventory();
         RoomSearchService searchService = new RoomSearchService();
@@ -20,9 +16,7 @@ public class BookMyStayApp {
                 suiteRoom
         );
 
-        /* --------------------------
-           Use Case 5: Booking Queue
-           -------------------------- */
+
 
         System.out.println("\nBooking Request Queue:");
 
@@ -46,6 +40,24 @@ public class BookMyStayApp {
                             request.getRoomType() +
                             " room"
             );
+        }
+
+
+
+        System.out.println("\nRoom Allocation:");
+
+
+        bookingQueue.addRequest(r1);
+        bookingQueue.addRequest(r2);
+        bookingQueue.addRequest(r3);
+
+        RoomAllocationService allocationService = new RoomAllocationService();
+
+        while (bookingQueue.hasPendingRequests()) {
+
+            Reservation request = bookingQueue.getNextRequest();
+
+            allocationService.allocateRoom(request, inventory);
         }
     }
 }
