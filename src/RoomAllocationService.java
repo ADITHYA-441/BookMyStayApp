@@ -57,4 +57,7 @@ public class RoomAllocationService {
 
         return roomId;
     }
+
+    public void allocateRoom(Reservation request, RoomInventory inventory, BookingHistory history) {
+    }
 }
